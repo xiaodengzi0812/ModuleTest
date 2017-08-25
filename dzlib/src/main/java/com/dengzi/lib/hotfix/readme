@@ -1,0 +1,23 @@
+热修复动态替换dex文件介绍：
+1、支持新增方法，新增属性，新增类
+2、不支持资源文件的新增与替换
+3、加载全量dex文件，对用户的流量消耗比较大
+4、提供一种解决热修复的思路，未做版本的适配（华为A5 5.0系统 测试通过）
+
+使用：
+1、在app启动时初始化并加载所有的修复包
+        try {
+            HotFixManager hotFixManager = new HotFixManager(context);
+            hotFixManager.loadDex();
+        } catch (Exception e) {
+        }
+
+2、下载到修复包之后
+        HotFixManager hotFixManager = new HotFixManager(context);
+        String dexFilePath = "dex包文件的全路径";
+        if (dexFile.exists()) {
+            try {
+                hotFixManager.addDex(dexFilePath);
+            } catch (Exception e) {
+            }
+        }
