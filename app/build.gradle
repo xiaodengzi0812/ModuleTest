@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 23
-    buildToolsVersion "23.0.1"
+    compileSdkVersion 25
+    buildToolsVersion "25.0.0"
+
     defaultConfig {
-        applicationId "com.dengzi.moduletest"
         minSdkVersion 15
-        targetSdkVersion 23
+        targetSdkVersion 25
         versionCode 1
         versionName "1.0"
     }
@@ -18,13 +18,12 @@ android {
     }
 }
 
+
 dependencies {
     compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile 'com.android.support:support-v4:23+'
-    compile 'com.android.support:design:23+'
+    compile 'com.android.support:support-v4:25+'
+    compile 'com.android.support:design:25+'
     compile project(':dzlib')
-    //    compile 'com.r0adkll:slidableactivity:2.0.5'
-    compile project(':dzview')
     compile files('libs/fastjson-1.2.31.jar')
     compile files('libs/okhttp-3.8.1.jar')
     compile files('libs/okio-1.13.0.jar')
