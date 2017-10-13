@@ -12,7 +12,7 @@ import com.dengzi.moduletest.net.BaseBean;
 import com.dengzi.moduletest.net.FastJsonCallBack;
 
 /**
- * @Title: topbar测试类
+ * @Title: 网络框架测试类
  * @Author: djk
  * @Time: 2017/8/2
  * @Version:1.0.0
@@ -48,7 +48,7 @@ public class NetTestActivity extends BaseBackActivity {
     }
 
     public void netTest(View view) {
-        HttpManager.getInstence(this).url("http://gmp-usercenter-service.intra.sit.ffan.com/appversion").get().execute(new FastJsonCallBack<BaseBean>() {
+        HttpManager.getInstence(this).url("https://api.ffan.com/gmps_usercenter/v1/appversion").post().execute(new FastJsonCallBack<BaseBean>() {
             @Override
             public void onSuccess(BaseBean bean) {
                 tv.setText("success:" + bean.getMessage());

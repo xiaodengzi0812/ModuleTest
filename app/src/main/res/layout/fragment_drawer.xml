@@ -100,12 +100,12 @@
                 android:background="#CCCCCC" />
 
             <TextView
-                android:id="@+id/dao_test_tv"
+                android:id="@+id/load_image_tv"
                 android:layout_width="match_parent"
                 android:layout_height="40dp"
                 android:gravity="center_vertical"
                 android:paddingLeft="15dp"
-                android:text="数据库框架"
+                android:text="插件换肤"
                 android:textColor="#AAAAAA"
                 android:textSize="16sp" />
 
@@ -115,6 +115,7 @@
                 android:layout_marginLeft="15dp"
                 android:layout_marginRight="15dp"
                 android:background="#CCCCCC" />
+
 
         </LinearLayout>
 

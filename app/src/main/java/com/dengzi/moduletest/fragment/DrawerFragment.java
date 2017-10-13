@@ -8,9 +8,9 @@ import android.view.View;
 import com.dengzi.lib.ioc.BindClick;
 import com.dengzi.lib.ioc.BindUtil;
 import com.dengzi.moduletest.R;
-import com.dengzi.moduletest.activity.DaoActivity;
 import com.dengzi.moduletest.activity.HotFixActivity;
 import com.dengzi.moduletest.activity.IocActivity;
+import com.dengzi.moduletest.activity.SkinActivity;
 import com.dengzi.moduletest.activity.NetTestActivity;
 import com.dengzi.moduletest.base.BaseDrawerActivity;
 import com.dengzi.moduletest.base.BaseFragment;
@@ -52,7 +52,7 @@ public class DrawerFragment extends BaseFragment {
     public void onWidgetClick(View view) {
     }
 
-    @BindClick({R.id.ioc_tv, R.id.hot_fix_tv, R.id.net_test_tv, R.id.dao_test_tv})
+    @BindClick({R.id.ioc_tv, R.id.hot_fix_tv, R.id.net_test_tv, R.id.load_image_tv})
     public void onClick(View view) {
         ((BaseDrawerActivity) getActivity()).closeDrawerView();
         switch (view.getId()) {
@@ -65,8 +65,8 @@ public class DrawerFragment extends BaseFragment {
             case R.id.net_test_tv:
                 mActivity.startActivity(new Intent(getActivity(), NetTestActivity.class));
                 break;
-            case R.id.dao_test_tv:
-                mActivity.startActivity(new Intent(getActivity(), DaoActivity.class));
+            case R.id.load_image_tv:
+                mActivity.startActivity(new Intent(getActivity(), SkinActivity.class));
                 break;
         }
         ((BaseDrawerActivity) getActivity()).onDrawerItemClick(view.getId());

@@ -1,1 +1,1 @@
-include ':app', ':dzlib'
+include ':app', ':dzlib', ':dzframework'

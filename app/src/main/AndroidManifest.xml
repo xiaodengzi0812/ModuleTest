@@ -59,7 +59,6 @@
         <activity android:name=".activity.HotFixActivity" />
         <activity android:name=".activity.IocActivity" />
         <activity android:name=".activity.AppActivity" />
-        <activity android:name=".activity.DaoActivity" />
         <activity android:name=".activity.DeviceActivity" />
         <activity android:name=".activity.ImageActivity" />
         <activity android:name=".activity.NetworkActivity" />
@@ -70,6 +69,7 @@
         <activity android:name=".activity.SpanActivity" />
         <activity android:name=".activity.ToastActivity" />
         <activity android:name=".activity.NetTestActivity" />
+        <activity android:name=".activity.SkinActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
