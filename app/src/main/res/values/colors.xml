@@ -15,6 +15,7 @@
 
     <color name="skin_blue">#127a97</color>
     <color name="skin_red">#bf0c43</color>
+    <color name="skin_green">#8eac00</color>
 
 
     <integer-array name="rainbow">

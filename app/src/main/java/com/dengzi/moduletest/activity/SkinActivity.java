@@ -1,6 +1,8 @@
 package com.dengzi.moduletest.activity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.annotation.Nullable;
 import android.view.View;
 import android.widget.ImageView;
@@ -8,6 +10,8 @@ import android.widget.ImageView;
 import com.dengzi.dzframework.skin.SkinBaseActivity;
 import com.dengzi.dzframework.skin.SkinManager;
 import com.dengzi.moduletest.R;
+
+import java.io.File;
 
 /**
  * @Title: 插件换肤
@@ -31,7 +35,7 @@ public class SkinActivity extends SkinBaseActivity {
      * 换肤
      */
     public void skin(View view) {
-        String skinPath = "";
+        String skinPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "dengzi.skin";
         int result = SkinManager.getInstance().loadSkin(skinPath);
     }
 
@@ -40,6 +44,14 @@ public class SkinActivity extends SkinBaseActivity {
      */
     public void recovery(View view) {
         int result = SkinManager.getInstance().recovery();
+    }
+
+    /**
+     * 恢复
+     */
+    public void toOtherPage(View view) {
+        Intent intent = new Intent(SkinActivity.this, SkinActivity.class);
+        startActivity(intent);
     }
 
 }

@@ -21,6 +21,7 @@ import com.dengzi.dzframework.skin.attr.SkinView;
 
 import org.xmlpull.v1.XmlPullParser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -63,7 +64,12 @@ public class SkinBaseActivity extends AppCompatActivity implements LayoutInflate
      * 统一管理skinview
      */
     private void managerSkinView(SkinView skinView) {
-
+        List<SkinView> skinViewList = SkinManager.getInstance().getSkinViews(this);
+        if (skinViewList == null) {
+            skinViewList = new ArrayList<>();
+            SkinManager.getInstance().setSkinViews(this, skinViewList);
+        }
+        skinViewList.add(skinView);
     }
 
     /**

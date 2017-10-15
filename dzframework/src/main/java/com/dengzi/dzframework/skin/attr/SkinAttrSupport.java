@@ -23,13 +23,15 @@ public class SkinAttrSupport {
             String attrName = attrs.getAttributeName(index);
             String attrValue = attrs.getAttributeValue(index);
 
-            Log.e("dengzi", "attrName：" + attrName + "， attrValue：" + attrValue);
+//            Log.e("dengzi", "attrName：" + attrName + "， attrValue：" + attrValue);
             // attrName：textColor， attrValue：@2131558476
 
             // 只获取我们关心的属性
             SkinType skinType = getSkinTypeByName(attrName);
             if (skinType != null) {
+                Log.e("dengzi", "skinType：" + skinType.name());
                 String resName = getResNameByValue(context, attrValue);
+                Log.e("dengzi", "resName：" + resName);
                 if (!TextUtils.isEmpty(resName)) {
                     SkinAttr skinAttr = new SkinAttr(resName, skinType);
                     skinAttrList.add(skinAttr);
@@ -50,7 +52,7 @@ public class SkinAttrSupport {
         if (attrValue.startsWith("@")) {
             attrValue = attrValue.substring(1);
             int resId = Integer.parseInt(attrValue);
-            return context.getResources().getResourceName(resId);
+            return context.getResources().getResourceEntryName(resId);
         }
         return null;
     }
