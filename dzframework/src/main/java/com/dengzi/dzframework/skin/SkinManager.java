@@ -22,9 +22,9 @@ import java.util.Set;
 public class SkinManager {
     private static SkinManager mSkinManager;
     private static Context mContext;
-
+    // 获取外部资源
     private SkinResource mSkinResource;
-
+    // 换肤view的集合
     public Map<Activity, List<SkinView>> mSkinViews = new ArrayMap<>();
 
     static {

@@ -10,7 +10,7 @@ import com.dengzi.dzframework.skin.SkinManager;
 
 /**
  * @author Djk
- * @Title:
+ * @Title: 换肤view的type，只定义我们关心的几个换肤属性枚举
  * @Time: 2017/10/13.
  * @Version:1.0.0
  */

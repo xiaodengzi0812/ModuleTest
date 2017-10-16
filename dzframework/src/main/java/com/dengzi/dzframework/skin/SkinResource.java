@@ -18,7 +18,6 @@ import java.lang.reflect.Method;
  * @Version:1.0.0
  */
 public class SkinResource {
-
     // 资源都是通过这个对象获取
     private Resources mSkinResource;
     // 皮肤apk对应的包名
