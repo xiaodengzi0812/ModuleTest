@@ -25,6 +25,8 @@ public class SkinResource {
 
     public SkinResource(Context context, String skinPath) {
         try {
+            // 获取skin包名
+            mSkinPackageName = getPackageNameByPath(context, skinPath);
             //获取apk的资源 最终都要通过AssetManager 获取,  getAssets() 获取的AssetManager是获取的本身Apk的
             //获取其他Apk的资源需要实例化一个AssetManager,并把该AssetManager的加载路径修改为被 加载的Apk的路径
             // 反射获取AssetManager
@@ -36,8 +38,6 @@ public class SkinResource {
             method.invoke(assetManager, skinPath);
             // 创建一个我们自己的 Resources
             mSkinResource = new Resources(assetManager, supResource.getDisplayMetrics(), supResource.getConfiguration());
-            // 获取skin包名
-            getPackageNameByPath(context, skinPath);
         } catch (Exception e) {
         }
     }
@@ -48,13 +48,14 @@ public class SkinResource {
      * @param context
      * @param skinPath
      */
-    private void getPackageNameByPath(Context context, String skinPath) {
+    public static String getPackageNameByPath(Context context, String skinPath) {
         PackageManager pm = context.getPackageManager();
         PackageInfo info = pm.getPackageArchiveInfo(skinPath, PackageManager.GET_ACTIVITIES);
         if (info != null) {
             ApplicationInfo appInfo = info.applicationInfo;
-            mSkinPackageName = appInfo.packageName;  //得到安装包名称
+            return appInfo.packageName;  //得到安装包名称
         }
+        return null;
     }
 
     /**
@@ -89,5 +90,14 @@ public class SkinResource {
         } catch (Resources.NotFoundException e) {
         }
         return color;
+    }
+
+    /**
+     * 返回当前加载皮肤的包名
+     *
+     * @return
+     */
+    public String getLoadedPackageName() {
+        return mSkinPackageName;
     }
 }

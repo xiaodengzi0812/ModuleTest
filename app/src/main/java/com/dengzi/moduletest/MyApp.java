@@ -2,6 +2,7 @@ package com.dengzi.moduletest;
 
 import android.os.Environment;
 
+import com.dengzi.dzframework.skin.SkinManager;
 import com.dengzi.lib.DZUtil;
 import com.dengzi.lib.net.HttpManager;
 import com.dengzi.lib.util.CrashUtils;
@@ -21,8 +22,19 @@ public class MyApp extends BaseApplication {
         super.onCreate();
         initUtil();
         iniHttp();
+        initSkin();
     }
 
+    /**
+     * 初始化插件换肤框架
+     */
+    private void initSkin() {
+        SkinManager.getInstance().init(this);
+    }
+
+    /**
+     * 初始化http网络框架
+     */
     private void iniHttp() {
         HttpManager.initEngine(OkHttpEngine.getInstance());
     }

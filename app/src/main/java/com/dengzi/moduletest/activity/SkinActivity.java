@@ -4,11 +4,14 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.dengzi.dzframework.skin.SkinBaseActivity;
 import com.dengzi.dzframework.skin.SkinManager;
+import com.dengzi.dzframework.skin.SkinResource;
 import com.dengzi.moduletest.R;
 
 import java.io.File;
@@ -21,14 +24,15 @@ import java.io.File;
  */
 public class SkinActivity extends SkinBaseActivity {
 
-    ImageView iv;
+    private TextView mCurrentTv;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_skin);
-        iv = (ImageView) findViewById(R.id.iv);
-        SkinManager.init(this);
+        mCurrentTv = (TextView) findViewById(R.id.current_tv);
+        // 手动调用一下换肤插件
+        changCustomSkinView();
     }
 
     /**
@@ -36,22 +40,32 @@ public class SkinActivity extends SkinBaseActivity {
      */
     public void skin(View view) {
         String skinPath = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "dengzi.skin";
-        int result = SkinManager.getInstance().loadSkin(skinPath);
+        SkinManager.getInstance().loadSkin(skinPath);
     }
 
     /**
      * 恢复
      */
     public void recovery(View view) {
-        int result = SkinManager.getInstance().recovery();
+        SkinManager.getInstance().recovery();
     }
 
     /**
-     * 恢复
+     * 跳转
      */
     public void toOtherPage(View view) {
         Intent intent = new Intent(SkinActivity.this, SkinActivity.class);
         startActivity(intent);
     }
 
+    /**
+     * 自定义view的换肤
+     */
+    @Override
+    protected void changCustomSkinView() {
+        if (mCurrentTv != null && mSkinResource != null) {
+            String packageName = mSkinResource.getLoadedPackageName();
+            mCurrentTv.setText(packageName);
+        }
+    }
 }
