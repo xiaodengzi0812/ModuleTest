@@ -14,6 +14,7 @@ import com.dengzi.moduletest.activity.SkinActivity;
 import com.dengzi.moduletest.activity.NetTestActivity;
 import com.dengzi.moduletest.base.BaseDrawerActivity;
 import com.dengzi.moduletest.base.BaseFragment;
+import com.dengzi.moduletest.ipc.IpcActivity;
 
 /**
  * @Title: 侧滑view
@@ -52,7 +53,7 @@ public class DrawerFragment extends BaseFragment {
     public void onWidgetClick(View view) {
     }
 
-    @BindClick({R.id.ioc_tv, R.id.hot_fix_tv, R.id.net_test_tv, R.id.load_image_tv})
+    @BindClick({R.id.ioc_tv, R.id.hot_fix_tv, R.id.net_test_tv, R.id.load_image_tv, R.id.guard_service_tv})
     public void onClick(View view) {
         ((BaseDrawerActivity) getActivity()).closeDrawerView();
         switch (view.getId()) {
@@ -67,6 +68,9 @@ public class DrawerFragment extends BaseFragment {
                 break;
             case R.id.load_image_tv:
                 mActivity.startActivity(new Intent(getActivity(), SkinActivity.class));
+                break;
+            case R.id.guard_service_tv:
+                mActivity.startActivity(new Intent(getActivity(), IpcActivity.class));
                 break;
         }
         ((BaseDrawerActivity) getActivity()).onDrawerItemClick(view.getId());

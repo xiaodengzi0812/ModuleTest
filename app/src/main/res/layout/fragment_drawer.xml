@@ -116,6 +116,23 @@
                 android:layout_marginRight="15dp"
                 android:background="#CCCCCC" />
 
+            <TextView
+                android:id="@+id/guard_service_tv"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="15dp"
+                android:text="双进程守护"
+                android:textColor="#AAAAAA"
+                android:textSize="16sp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:background="#CCCCCC" />
+
 
         </LinearLayout>
 
