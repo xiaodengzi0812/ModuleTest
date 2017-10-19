@@ -41,7 +41,7 @@ public class SkinBaseActivity extends AppCompatActivity implements LayoutInflate
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         // view的绘制拦截
-        LayoutInflater layoutInflater = LayoutInflater.from(getApplicationContext());
+        LayoutInflater layoutInflater = LayoutInflater.from(this);
         if (layoutInflater.getFactory() == null) {
             LayoutInflaterCompat.setFactory(layoutInflater, this);
         }

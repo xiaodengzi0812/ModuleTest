@@ -4,14 +4,11 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.os.Environment;
 import android.support.annotation.Nullable;
-import android.util.Log;
 import android.view.View;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.dengzi.dzframework.skin.SkinBaseActivity;
 import com.dengzi.dzframework.skin.SkinManager;
-import com.dengzi.dzframework.skin.SkinResource;
 import com.dengzi.moduletest.R;
 
 import java.io.File;
