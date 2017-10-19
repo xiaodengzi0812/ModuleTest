@@ -30,6 +30,8 @@ public class UserService extends Service {
         @Override
         public void onServiceConnected(ComponentName name, IBinder service) {
             Log.e("dengzi", "UserService 连接成功");
+            // 这里可以获取一个别的进程的aidl，然后aidl里有什么方法可以在这里调用
+            // IServiceAidl aidl = IServiceAidl.Stub.asInterface(service);
         }
 
         @Override
