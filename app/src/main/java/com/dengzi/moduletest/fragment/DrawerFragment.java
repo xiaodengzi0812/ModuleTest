@@ -15,6 +15,7 @@ import com.dengzi.moduletest.activity.NetTestActivity;
 import com.dengzi.moduletest.base.BaseDrawerActivity;
 import com.dengzi.moduletest.base.BaseFragment;
 import com.dengzi.moduletest.ipc.IpcActivity;
+import com.dengzi.moduletest.plugin.NoConfigActivity;
 
 /**
  * @Title: 侧滑view
@@ -71,6 +72,9 @@ public class DrawerFragment extends BaseFragment {
                 break;
             case R.id.guard_service_tv:
                 mActivity.startActivity(new Intent(getActivity(), IpcActivity.class));
+                break;
+            case R.id.no_config_tv:
+                mActivity.startActivity(new Intent(getActivity(), NoConfigActivity.class));
                 break;
         }
         ((BaseDrawerActivity) getActivity()).onDrawerItemClick(view.getId());

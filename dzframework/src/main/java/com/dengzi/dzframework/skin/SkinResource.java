@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.content.res.AssetManager;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.content.res.XmlResourceParser;
 import android.graphics.drawable.Drawable;
 
 import java.lang.reflect.Method;
@@ -90,6 +91,18 @@ public class SkinResource {
         } catch (Resources.NotFoundException e) {
         }
         return color;
+    }
+
+    /**
+     * 通过名字来获取layout布局
+     *
+     * @param resName
+     * @return
+     */
+    public XmlResourceParser getLayout(String resName) {
+        int layoutID = mSkinResource.getIdentifier(resName, "layout", mSkinPackageName);
+        XmlResourceParser layout = mSkinResource.getLayout(layoutID);
+        return layout;
     }
 
     /**

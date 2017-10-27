@@ -1,0 +1,13 @@
+插件换肤：
+
+有几个坎：
+    1、如何获取apk中的资源
+    2、获取到资源后如何全局替换view的属性
+
+解决方案：
+    1、我们查看系统加载资源的源码，我们可以根据外部资源apk模拟一个外部的资源resource加载类，
+    用我们自己的resource类去加载外部资源
+
+    2、我们继承AppCompatActivity，我们在布局中添加一个TextView，但我们发现这个TextView变成了AppCompatTextView
+    由此得来的灵感，我们可以拦截view的绘制，然后全局替换view的属性
+

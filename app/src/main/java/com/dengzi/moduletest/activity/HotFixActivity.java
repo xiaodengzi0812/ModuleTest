@@ -36,10 +36,15 @@ public class HotFixActivity extends BaseBackActivity {
     public void initView(Bundle savedInstanceState, View view) {
         BindUtil.inject(this);
         getToolBar().setTitle("热修复测试");
-//        testTv.setText("bug搞定了");
-//        testTv.setTextColor(Color.parseColor("#00ff00"));
-        testTv.setText("这里是一个bug");
-        testTv.setTextColor(Color.parseColor("#ff0000"));
+    }
+
+    @BindClick({R.id.fix_btn})
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.fix_btn:
+                fixDex();
+                break;
+        }
     }
 
     /**
@@ -47,7 +52,7 @@ public class HotFixActivity extends BaseBackActivity {
      */
     private void fixDex() {
         HotFixManager hotFixManager = new HotFixManager(this);
-        File dexFile = new File(Environment.getExternalStorageDirectory(), "fix.dex");
+        File dexFile = new File(Environment.getExternalStorageDirectory(), "hotFix.apk");
         if (dexFile.exists()) {
             try {
                 hotFixManager.addDex(dexFile.getAbsolutePath());
@@ -56,6 +61,8 @@ public class HotFixActivity extends BaseBackActivity {
                 Toast.makeText(this, "修复失败", Toast.LENGTH_SHORT).show();
                 e.printStackTrace();
             }
+        } else {
+            Toast.makeText(this, "修复包不存在", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -72,14 +79,5 @@ public class HotFixActivity extends BaseBackActivity {
     @Override
     public void onWidgetClick(View view) {
 
-    }
-
-    @BindClick({R.id.fix_btn})
-    public void onClick(View view) {
-        switch (view.getId()) {
-            case R.id.fix_btn:
-                fixDex();
-                break;
-        }
     }
 }

@@ -4,10 +4,12 @@ import android.os.Environment;
 
 import com.dengzi.dzframework.skin.SkinManager;
 import com.dengzi.lib.DZUtil;
+import com.dengzi.lib.hookstartactivity.HookStartActivityUtil;
 import com.dengzi.lib.net.HttpManager;
 import com.dengzi.lib.util.CrashUtils;
 import com.dengzi.moduletest.base.BaseApplication;
 import com.dengzi.moduletest.net.OkHttpEngine;
+import com.dengzi.moduletest.plugin.ProxyActivity;
 
 /**
  * @Title: 自定义application
@@ -23,6 +25,11 @@ public class MyApp extends BaseApplication {
         initUtil();
         iniHttp();
         initSkin();
+        initHook();
+    }
+
+    private void initHook() {
+//        new HookStartActivityUtil(this, ProxyActivity.class).execute();
     }
 
     /**

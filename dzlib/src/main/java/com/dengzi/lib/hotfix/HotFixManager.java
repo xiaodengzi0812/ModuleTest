@@ -54,7 +54,7 @@ public class HotFixManager {
         File[] dexFiles = sysDexFile.listFiles();
         List<File> hotFixDexList = new ArrayList<>();
         for (File dexFile : dexFiles) {
-            if (dexFile.getName().endsWith(".dex")) {
+            if (dexFile.getName().endsWith(".dex") || dexFile.getName().endsWith(".apk")) {
                 hotFixDexList.add(dexFile);
             }
         }

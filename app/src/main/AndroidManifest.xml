@@ -73,6 +73,7 @@
         <activity android:name=".activity.NetTestActivity" />
         <activity android:name=".activity.SkinActivity" />
         <activity android:name=".ipc.IpcActivity" />
+        <activity android:name=".plugin.ProxyActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
