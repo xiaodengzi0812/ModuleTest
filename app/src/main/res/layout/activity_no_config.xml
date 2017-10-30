@@ -11,5 +11,5 @@
         android:layout_centerInParent="true"
         android:text="这个Activity没有在manifests中配置"
         android:textColor="#333333"
-        android:textSize="22sp" />
+        android:textSize="18sp" />
 </RelativeLayout>

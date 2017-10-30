@@ -107,16 +107,18 @@ public class BindUtil {
                         // 找到对应的view
                         View view = binderHelper.findViewById(viewId);
                         // 给对应的view设置点击事件
-                        view.setOnClickListener(new View.OnClickListener() {
-                            @Override
-                            public void onClick(View view) {
-                                try {
-                                    method.invoke(object, view);
-                                } catch (Exception e) {
-                                    e.printStackTrace();
+                        if (view != null) {
+                            view.setOnClickListener(new View.OnClickListener() {
+                                @Override
+                                public void onClick(View view) {
+                                    try {
+                                        method.invoke(object, view);
+                                    } catch (Exception e) {
+                                        e.printStackTrace();
+                                    }
                                 }
-                            }
-                        });
+                            });
+                        }
                     }
                 }
             }

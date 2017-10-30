@@ -25,7 +25,5 @@
         android:layout_marginRight="15dp"
         android:layout_marginTop="20dp"
         android:gravity="center"
-        android:text="这里是一个bug"
-        android:textColor="#ff0000"
         android:textSize="22sp" />
 </LinearLayout>

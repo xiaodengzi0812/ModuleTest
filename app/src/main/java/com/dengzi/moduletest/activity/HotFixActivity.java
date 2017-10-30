@@ -36,6 +36,11 @@ public class HotFixActivity extends BaseBackActivity {
     public void initView(Bundle savedInstanceState, View view) {
         BindUtil.inject(this);
         getToolBar().setTitle("热修复测试");
+
+//        testTv.setText("bug搞定了");
+//        testTv.setTextColor(Color.parseColor("#00ff00"));
+        testTv.setText("这里是一个bug");
+        testTv.setTextColor(Color.parseColor("#ff0000"));
     }
 
     @BindClick({R.id.fix_btn})

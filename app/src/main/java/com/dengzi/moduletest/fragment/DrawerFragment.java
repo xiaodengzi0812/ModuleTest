@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.dengzi.lib.hookstartactivity.HookStartActivityUtil;
 import com.dengzi.lib.ioc.BindClick;
 import com.dengzi.lib.ioc.BindUtil;
 import com.dengzi.moduletest.R;
@@ -16,6 +17,7 @@ import com.dengzi.moduletest.base.BaseDrawerActivity;
 import com.dengzi.moduletest.base.BaseFragment;
 import com.dengzi.moduletest.ipc.IpcActivity;
 import com.dengzi.moduletest.plugin.NoConfigActivity;
+import com.dengzi.moduletest.plugin.ProxyActivity;
 
 /**
  * @Title: 侧滑view
@@ -54,7 +56,7 @@ public class DrawerFragment extends BaseFragment {
     public void onWidgetClick(View view) {
     }
 
-    @BindClick({R.id.ioc_tv, R.id.hot_fix_tv, R.id.net_test_tv, R.id.load_image_tv, R.id.guard_service_tv})
+    @BindClick({R.id.ioc_tv, R.id.hot_fix_tv, R.id.net_test_tv, R.id.load_image_tv, R.id.guard_service_tv, R.id.no_config_tv})
     public void onClick(View view) {
         ((BaseDrawerActivity) getActivity()).closeDrawerView();
         switch (view.getId()) {
@@ -74,10 +76,17 @@ public class DrawerFragment extends BaseFragment {
                 mActivity.startActivity(new Intent(getActivity(), IpcActivity.class));
                 break;
             case R.id.no_config_tv:
-                mActivity.startActivity(new Intent(getActivity(), NoConfigActivity.class));
+                toNoConfigActivity();
                 break;
         }
         ((BaseDrawerActivity) getActivity()).onDrawerItemClick(view.getId());
     }
 
+    /**
+     * 跳转到没有在manifests中配置的activity
+     */
+    private void toNoConfigActivity() {
+        new HookStartActivityUtil(mActivity, ProxyActivity.class).execute();
+        mActivity.startActivity(new Intent(getActivity(), NoConfigActivity.class));
+    }
 }

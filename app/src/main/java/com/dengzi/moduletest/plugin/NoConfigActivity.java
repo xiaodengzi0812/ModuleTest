@@ -3,6 +3,8 @@ package com.dengzi.moduletest.plugin;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
+import com.dengzi.moduletest.R;
+
 /**
  * @Title: 没有在manifests中配置的Activity
  * @Author: djk
@@ -14,6 +16,7 @@ public class NoConfigActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_no_config);
     }
 }
 
