@@ -29,7 +29,7 @@ public class MyApp extends BaseApplication {
     }
 
     private void initHook() {
-//        new HookStartActivityUtil(this, ProxyActivity.class).execute();
+        new HookStartActivityUtil(this, ProxyActivity.class).execute();
     }
 
     /**

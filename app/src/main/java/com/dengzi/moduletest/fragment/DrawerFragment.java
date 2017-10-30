@@ -86,7 +86,7 @@ public class DrawerFragment extends BaseFragment {
      * 跳转到没有在manifests中配置的activity
      */
     private void toNoConfigActivity() {
-        new HookStartActivityUtil(mActivity, ProxyActivity.class).execute();
+        // 在MyApp中initHook()
         mActivity.startActivity(new Intent(getActivity(), NoConfigActivity.class));
     }
 }
