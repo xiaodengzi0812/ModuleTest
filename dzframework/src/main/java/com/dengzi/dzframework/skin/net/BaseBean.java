@@ -1,4 +1,4 @@
-package com.dengzi.moduletest.net;
+package com.dengzi.dzframework.skin.net;
 
 import java.io.Serializable;
 

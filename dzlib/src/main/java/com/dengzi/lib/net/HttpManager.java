@@ -33,7 +33,8 @@ public class HttpManager {
         POST,
         PUT,
         DELETE,
-        DOWNLOAD
+        DOWNLOAD,
+        UPLOAD
     }
 
     /*给一个默认构造函数，不能new*/
@@ -103,6 +104,12 @@ public class HttpManager {
         return this;
     }
 
+    //upload方法
+    public HttpManager upload() {
+        this.mHttpType = TYPE.UPLOAD;
+        return this;
+    }
+
     /*添加参数*/
     public HttpManager param(String key, Object value) {
         this.mParams.put(key, value);
@@ -119,10 +126,10 @@ public class HttpManager {
     public void execute(HttpCallBack callBack) {
         /*如果无回调，默认给一个空回调*/
         if (callBack == null) {
-            callBack = callBack.getDefaultCallBack();
+            callBack = new DefaultHttpCallBack();
         }
         /*请求前的准备*/
-        callBack.onPre(mParams);
+        if (callBack.onPre(mParams)) return;
         if (mHttpType == TYPE.GET) {
             mHttpEngine.get(mContext, mUrl, mParams, callBack);
         }
@@ -137,6 +144,9 @@ public class HttpManager {
         }
         if (mHttpType == TYPE.DOWNLOAD) {
             mHttpEngine.download(mContext, mUrl, mDownPath, callBack);
+        }
+        if (mHttpType == TYPE.UPLOAD) {
+            mHttpEngine.upLoad(mContext, mUrl, mParams, callBack);
         }
     }
 

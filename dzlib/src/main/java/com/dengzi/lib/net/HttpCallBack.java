@@ -15,13 +15,11 @@ public interface HttpCallBack {
     String EMPTY_RESULT = "empty result!";
 
     /*准备执行，可以在这个方法中添加默认参数*/
-    void onPre(Map<String, Object> mParams);
+    boolean onPre(Map<String, Object> mParams);
 
     /* 失败的回调*/
     void onError(int code, String msg);
 
     /*成功的回调*/
     void onSuccess(String result);
-
-    HttpCallBack getDefaultCallBack();
 }

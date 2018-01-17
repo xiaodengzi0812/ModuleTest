@@ -18,7 +18,7 @@ public final class DZUtil {
     @SuppressLint("StaticFieldLeak")
     private static Context context;
 
-    private static DZUtil mDZUtil;
+    private static volatile DZUtil mDZUtil;
 
     private DZUtil(@NonNull final Context context) {
         DZUtil.context = context.getApplicationContext();
@@ -32,7 +32,9 @@ public final class DZUtil {
     public static DZUtil init(@NonNull final Context context) {
         if (mDZUtil == null) {
             synchronized (DZUtil.class) {
-                mDZUtil = new DZUtil(context);
+                if (mDZUtil == null) {
+                    mDZUtil = new DZUtil(context);
+                }
             }
         }
         return mDZUtil;

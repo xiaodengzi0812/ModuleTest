@@ -3,12 +3,12 @@ package com.dengzi.moduletest;
 import android.os.Environment;
 
 import com.dengzi.dzframework.skin.SkinManager;
+import com.dengzi.dzframework.skin.net.OkHttpEngine;
 import com.dengzi.lib.DZUtil;
 import com.dengzi.lib.hookstartactivity.HookStartActivityUtil;
 import com.dengzi.lib.net.HttpManager;
 import com.dengzi.lib.util.CrashUtils;
 import com.dengzi.moduletest.base.BaseApplication;
-import com.dengzi.moduletest.net.OkHttpEngine;
 import com.dengzi.moduletest.plugin.ProxyActivity;
 
 /**

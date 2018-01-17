@@ -5,11 +5,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.dengzi.dzframework.skin.net.BaseBean;
 import com.dengzi.lib.net.HttpManager;
 import com.dengzi.moduletest.R;
 import com.dengzi.moduletest.base.BaseBackActivity;
-import com.dengzi.moduletest.net.BaseBean;
-import com.dengzi.moduletest.net.FastJsonCallBack;
+import com.dengzi.moduletest.net.RequestCallBack;
 
 /**
  * @Title: 网络框架测试类
@@ -48,7 +48,7 @@ public class NetTestActivity extends BaseBackActivity {
     }
 
     public void netTest(View view) {
-        HttpManager.getInstence(this).url("https://api.ffan.com/gmps_usercenter/v1/appversion").post().execute(new FastJsonCallBack<BaseBean>() {
+        HttpManager.getInstence(this).url("https://api.ffan.com/gmps_usercenter/v1/appversion").post().execute(new RequestCallBack<BaseBean>() {
             @Override
             public void onSuccess(BaseBean bean) {
                 tv.setText("success:" + bean.getMessage());

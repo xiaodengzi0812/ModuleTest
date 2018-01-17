@@ -1,4 +1,4 @@
-package com.dengzi.moduletest.net;
+package com.dengzi.dzframework.skin.net;
 
 import android.text.TextUtils;
 import android.util.Log;
@@ -13,17 +13,19 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.FormBody;
 import okhttp3.Headers;
 import okhttp3.MediaType;
+import okhttp3.MultipartBody;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okhttp3.logging.HttpLoggingInterceptor;
 
 /**
  * @author Djk
@@ -36,7 +38,7 @@ public class OkHttpEngine implements IHttpEngine {
     public static final MediaType JSON_TYPE = MediaType.parse("application/json; charset=utf-8");
     private static final String TOKEN_TYPE = "AuthToken";
     private static final String CONTENT_TYPE_KEY = "Content-Type";
-    private static final String CONTENT_TYPE_VALUE = "application/json";
+    private static final String CONTENT_TYPE_VALUE = "application/x-www-form-urlencoded";
     private static final String FILE_TYPES = "jpg,png,jpeg";
     private static final MediaType IMAGE_TYPE = MediaType.parse("image");
 
@@ -44,6 +46,12 @@ public class OkHttpEngine implements IHttpEngine {
             .connectTimeout(10, TimeUnit.SECONDS)
             .writeTimeout(10, TimeUnit.SECONDS)
             .readTimeout(30, TimeUnit.SECONDS)
+            .addInterceptor(new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+                @Override
+                public void log(String message) {
+                    Log.e("dengzi", "message = " + message);
+                }
+            }).setLevel(HttpLoggingInterceptor.Level.BASIC))
             .build();
 
     private static Headers.Builder getHeaderBuilder() {
@@ -68,7 +76,6 @@ public class OkHttpEngine implements IHttpEngine {
     @Override
     public void get(Object tag, String url, Map<String, Object> params, HttpCallBack callBack) {
         url = addParamsToUrl(url, params);
-        Log.e("dengzi", "url--" + url);
         Request request = new Request.Builder().url(url)
                 .headers(getHeaderBuilder().build())
                 .tag(tag).build();
@@ -77,8 +84,7 @@ public class OkHttpEngine implements IHttpEngine {
 
     @Override
     public void post(Object tag, String url, Map<String, Object> params, HttpCallBack callBack) {
-        String json = paramsToJson(params);
-        RequestBody requestBody = RequestBody.create(JSON_TYPE, TextUtils.isEmpty(json) ? "{}" : json);
+        FormBody requestBody = paramsToFormBody(params);
         Request request = new Request.Builder().url(url).tag(tag).post(requestBody)
                 .headers(getHeaderBuilder().build())
                 .build();
@@ -109,6 +115,31 @@ public class OkHttpEngine implements IHttpEngine {
     public void download(Object tag, String url, String downloadLocation, HttpCallBack callback) {
         final Request request = new Request.Builder().tag(tag).url(url).build();
         okHttpClient.newCall(request).enqueue(new MyDownloadCallBack(downloadLocation, callback));
+    }
+
+    @Override
+    public void upLoad(Object tag, String url, Map<String, Object> params, HttpCallBack callback) {
+        try {
+            MultipartBody.Builder builder = new MultipartBody.Builder();
+            //设置类型
+            builder.setType(MultipartBody.FORM);
+            //追加参数
+            for (String key : params.keySet()) {
+                Object object = params.get(key);
+                if (!(object instanceof File)) {
+                    builder.addFormDataPart(key, object.toString());
+                } else {
+                    File file = (File) object;
+                    builder.addFormDataPart(key, file.getName(), RequestBody.create(null, file));
+                }
+            }
+            //创建RequestBody
+            RequestBody body = builder.build();
+            //创建Request
+            final Request request = new Request.Builder().url(url).post(body).build();
+            okHttpClient.newCall(request).enqueue(new MyCallBack(callback));
+        } catch (Exception e) {
+        }
     }
 
     @Override
@@ -149,13 +180,21 @@ public class OkHttpEngine implements IHttpEngine {
         @Override
         public void onResponse(Call call, Response response) throws IOException {
             String result = response.body().string();
-            Log.e("dengzi", "result--" + result);
             if (!TextUtils.isEmpty(result)) {
                 httpCallBack.onSuccess(result);
             } else {
                 httpCallBack.onError(HttpCallBack.ERROR_CODE, HttpCallBack.EMPTY_RESULT);
             }
         }
+    }
+
+    private FormBody paramsToFormBody(Map<String, Object> params) {
+        FormBody.Builder formBody = new FormBody.Builder();
+
+        for (String key : params.keySet()) {
+            formBody.add(key, (String) params.get(key));
+        }
+        return formBody.build();
     }
 
     private class MyDownloadCallBack implements Callback {
@@ -224,5 +263,6 @@ public class OkHttpEngine implements IHttpEngine {
         }
         return url;
     }
+
 
 }
